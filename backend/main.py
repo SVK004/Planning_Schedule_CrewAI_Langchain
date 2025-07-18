@@ -3,6 +3,7 @@ import os
 
 from fastapi import FastAPI
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 
 # Add project root to sys.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -15,8 +16,16 @@ from Utils.json_msg_storage import save_to_memory, load_from_memory
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # You can restrict later
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 class TaskRequest(BaseModel):
     task: str
+
 
 task_classifier = TaskClassifier()
 calendar_agent = CalendarAgent()
@@ -27,6 +36,7 @@ subtask_generator = SubtaskGenerator()
 @app.post("/plan")
 async def process_task(request: TaskRequest):
     task = request.task
+    print(f"Processing the query: {task}")
 
     needs_calendar = task_classifier.needs_calendar(task)
     calendar_events = calendar_agent.get_events() if needs_calendar else None
@@ -44,6 +54,7 @@ async def process_task(request: TaskRequest):
     #     "subtasks": subtasks
     # }
 
+    print(f"Processed subtasks: {subtasks}")
     return {
         "success": True,
         "subtasks": subtasks

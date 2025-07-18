@@ -1,7 +1,7 @@
 import subprocess
 
 class SubtaskGenerator:
-    def __init__(self, model_name="llama3"):
+    def __init__(self, model_name="phi"):
         self.model = model_name
 
     def get_subtasks(self, prompt):

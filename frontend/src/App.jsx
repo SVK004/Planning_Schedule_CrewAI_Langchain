@@ -1,35 +1,60 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import axios from 'axios'
 
-function App() {
-  const [count, setCount] = useState(0)
+function App(){
+  const [query, setQuery] = useState("")
+  const [tasks, setTasks] = useState([])
+  const [loading, setLoading] = useState(false)
 
-  return (
+
+  async function handleSubmit(e){
+    e.preventDefault();
+    setLoading(true)
+    setTasks([])
+
+    try {
+      const res = await axios.post("http://localhost:8000/plan", {
+        task: query
+      })
+      if(res.data.success){
+        console.log(res.data.subtasks)
+        setTasks(res.data.subtasks)
+      }
+      else{
+        console.error("Error while processing the query...")
+      }
+    } catch (err) {
+      console.error(err)
+    }
+
+    setLoading(false)
+  }
+  return(
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+    <h2>🧠 Task Breaker</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Enter a task..."
+          style={{ width: '300px', padding: '0.5rem' }}
+        />
+        <button type="submit" style={{ marginLeft: '1rem', padding: '0.5rem' }}>
+          Generate
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      </form>
+
+      {loading && <p>Loading...</p>}
+
+      <ul>
+        {tasks.map((task, idx) => (
+          <li key={idx}>🔹 {task}</li>
+        ))}
+      </ul>
+    
     </>
   )
 }
 
-export default App
+export default App;
