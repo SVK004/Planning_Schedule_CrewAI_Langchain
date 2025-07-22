@@ -22,4 +22,5 @@ class SubtaskGenerator:
 
         # Extract lines that look like subtasks
         subtasks = [line.strip("- \n") for line in generated_text.split("\n") if line.strip()]
-        return subtasks
+        print(f"Subtasks: {subtasks}")
+        return subtasks[1::]

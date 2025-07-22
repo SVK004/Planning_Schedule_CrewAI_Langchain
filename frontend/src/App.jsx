@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from 'axios'
+import './App.css'
 
 function App(){
   const [query, setQuery] = useState("")
@@ -47,11 +48,12 @@ function App(){
 
       {loading && <p>Loading...</p>}
 
-      <ul>
+      <ul className="task-list">
         {tasks.map((task, idx) => (
-          <li key={idx}>🔹 {task}</li>
+        <li key={idx} className="task-item">🔹 {task}</li>
         ))}
       </ul>
+
     
     </>
   )
