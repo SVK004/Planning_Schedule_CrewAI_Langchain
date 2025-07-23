@@ -4,3 +4,7 @@ venv/
 
 # Ignore all __pycache__ folders everywhere
 __pycache__/
+
+# Ignore Google credentials and token
+backend/Agents/credentials.json
+backend/token.pickle

@@ -107,5 +107,16 @@
     "3. Go on a guided tour of the city's famous landmarks.",
     "4. Try out some local cuisine.",
     "5. Play games and participate in activities at an indoor playground or"
+  ],
+  "Can you plan my day tomorrow at an amusement park pleasee": [
+    "2. Determine which tickets, passes or subscriptions will be required to enter the park.",
+    "3. Check current weather conditions and make sure the chosen day is suitable for outdoor activities.",
+    "4. Plan a schedule that balances various attractions throughout the day to avoid crowding.",
+    "5. Arrange transportation from the user's location to the amusement park.",
+    "6. Create a list of food, drink and restroom needs before entering the park.",
+    "7. Make reservations or purchase tickets in advance if necessary.",
+    "8. Inform the user of any additional requirements or restrictions for certain rides or attractions.",
+    "9. Assist with selecting appropriate attire according to weather conditions and recommended dress code.",
+    "10. Arrange a pick-up time after the amusement park visit, ensuring that transportation is arranged beforehand."
   ]
 }
